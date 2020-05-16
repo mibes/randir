@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <title>randir</title>
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+    <h1 class="title">randir</h1>
+    <nav id="TOC"><ul>
+<li><a href="#example-use">1 Example use</a><ul></ul></li>
+<li><a href="#detail">2 Detail</a><ul></ul></li>
+<li><a href="#importing">3 Importing</a><ul></ul></li></ul></nav><p>Generates a directory with random names and telephone numbers. </p>
+<h1 id="example-use" class="section-header"><a href="#example-use">1 Example use</a></h1>
+<div class="example-wrap"><pre class="rust rust-example-rendered">
+<span class="kw">use</span> <span class="ident">randir</span>::<span class="ident">utils</span>::<span class="ident">generate_entries</span>;
+
+<span class="kw">fn</span> <span class="ident">main</span>() {
+    <span class="comment">// generate 100 random names and telephone numbers</span>
+    <span class="kw">let</span> <span class="ident">directory</span> <span class="op">=</span> <span class="ident">generate_entries</span>(<span class="number">100</span>);
+    <span class="kw">for</span> <span class="ident">entry</span> <span class="kw">in</span> <span class="ident">directory</span> {
+        <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">entry</span>)
+    }
+}</pre></div>
+<h1 id="detail" class="section-header"><a href="#detail">2 Detail</a></h1>
+<p>The result type of the <code>generate_entries()</code> function is a <code>Vec&lt;Entry&gt;</code>. <code>Entry</code> is defined as:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered">
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Entry</span> {
+    <span class="kw">pub</span> <span class="ident">uid</span>: <span class="ident">usize</span>,
+    <span class="kw">pub</span> <span class="ident">first_name</span>: <span class="ident">String</span>,
+    <span class="kw">pub</span> <span class="ident">last_name</span>: <span class="ident">String</span>,
+    <span class="kw">pub</span> <span class="ident">phone_nr</span>: <span class="ident">String</span>,
+}</pre></div>
+<h1 id="importing" class="section-header"><a href="#importing">3 Importing</a></h1>
+<p>To use the random directory generator, you need to include it in the <code>Cargo.toml</code> file of your Rust project:</p>
+<pre><code class="language-toml">[dependencies]
+randir = &quot;0.1.2&quot;
+</code></pre>
+
+    
+</body>
+</html>
