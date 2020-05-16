@@ -3,8 +3,8 @@ name = "randir"
 version = "0.1.0"
 authors = ["mibes <mibes@mibesco.com>"]
 edition = "2018"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+license = "MIT"
+description = "Generates a directory with random names and telephone numbers."
 
 [dependencies]
 rand = "0.7.3"
