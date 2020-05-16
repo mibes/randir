@@ -31,5 +31,5 @@ To use the random directory generator, you need to include it in the `Cargo.toml
 
 ```toml
 [dependencies]
-randir = "0.1.3"
+randir = "0.1.4"
 ```
