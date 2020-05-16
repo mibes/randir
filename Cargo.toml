@@ -5,6 +5,8 @@ authors = ["mibes <mibes@mibesco.com>"]
 edition = "2018"
 license = "MIT"
 description = "Generates a directory with random names and telephone numbers."
+repository = "https://github.com/mibes/randir"
+readme = "README.md"
 
 [dependencies]
 rand = "0.7.3"

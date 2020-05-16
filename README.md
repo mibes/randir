@@ -1,5 +1,5 @@
 # randir
-Generates a directory with random names and telephone numbers
+Generates a directory with random names and telephone numbers. 
 
 # Example use
 ```rust
@@ -26,3 +26,10 @@ pub struct Entry {
 }
 ```
 
+# Importing
+To use the random directory generator, you need to include it in the `Cargo.toml` file of your Rust project:
+
+```toml
+[dependencies]
+randir = "0.1.0"
+```
