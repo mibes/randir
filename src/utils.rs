@@ -2,7 +2,8 @@ use crate::entry::Entry;
 use rand::prelude::*;
 
 pub fn generate_entries(amount: usize) -> Vec<Entry> {
-    let surnames_list = [
+    const SURNAMES_LEN: usize = 1000;
+    const SURNAMES_LIST: [&str; SURNAMES_LEN] = [
         "Smith",
         "Johnson",
         "Williams",
@@ -1004,7 +1005,9 @@ pub fn generate_entries(amount: usize) -> Vec<Entry> {
         "Key",
         "Cooke",
     ];
-    let male_names_list = [
+
+    const MALE_NAMES_LEN: usize = 300;
+    const MALE_NAMES_LIST: [&str; MALE_NAMES_LEN] = [
         "James",
         "John",
         "Robert",
@@ -1306,7 +1309,9 @@ pub fn generate_entries(amount: usize) -> Vec<Entry> {
         "Freddie",
         "Wade",
     ];
-    let female_names_list = [
+
+    const FEMALE_NAMES_LEN: usize = 1000;
+    const FEMALE_NAMES_LIST: [&str; FEMALE_NAMES_LEN] = [
         "Mary",
         "Patricia",
         "Linda",
@@ -2309,9 +2314,24 @@ pub fn generate_entries(amount: usize) -> Vec<Entry> {
         "Celina",
     ];
 
-    let surnames_len = surnames_list.len() as f64;
-    let male_names_len = male_names_list.len() as f64;
-    let female_names_len = female_names_list.len() as f64;
+    const EMAIL_DOMAIN_LEN: usize = 9;
+    const EMAIL_DOMAINS_LIST: [&str; EMAIL_DOMAIN_LEN] = [
+        "icloud.com",
+        "gmail.com",
+        "yahoo.com",
+        "hotmail.com",
+        "msn.com",
+        "web.de",
+        "outlook.com",
+        "aol.com",
+        "orange.fr",
+    ];
+
+    const F_SURNAMES_LEN: f64 = SURNAMES_LEN as f64;
+    const F_MALE_NAMES_LEN: f64 = MALE_NAMES_LEN as f64;
+    const F_FEMALE_NAMES_LEN: f64 = FEMALE_NAMES_LEN as f64;
+    const F_EMAIL_DOMAIN_LEN: f64 = EMAIL_DOMAIN_LEN as f64;
+
     let mut result: Vec<Entry> = Vec::with_capacity(amount);
     let mut rng = rand::thread_rng();
 
@@ -2319,18 +2339,24 @@ pub fn generate_entries(amount: usize) -> Vec<Entry> {
         let use_female = rng.gen();
         let first_name = if use_female {
             let f: f64 = rng.gen();
-            let pos = (f * female_names_len).floor() as usize;
-            *female_names_list.get(pos).unwrap_or(&"")
+            let pos = (f * F_FEMALE_NAMES_LEN).floor() as usize;
+            *FEMALE_NAMES_LIST.get(pos).unwrap_or(&"")
         } else {
             let f: f64 = rng.gen();
-            let pos = (f * male_names_len).floor() as usize;
-            *male_names_list.get(pos).unwrap_or(&"")
+            let pos = (f * F_MALE_NAMES_LEN).floor() as usize;
+            *MALE_NAMES_LIST.get(pos).unwrap_or(&"")
         };
 
         let last_name = {
             let f: f64 = rng.gen();
-            let pos = (f * surnames_len).floor() as usize;
-            *surnames_list.get(pos).unwrap_or(&"")
+            let pos = (f * F_SURNAMES_LEN).floor() as usize;
+            *SURNAMES_LIST.get(pos).unwrap_or(&"")
+        };
+
+        let email_domain = {
+            let f: f64 = rng.gen();
+            let pos = (f * F_EMAIL_DOMAIN_LEN).floor() as usize;
+            *EMAIL_DOMAINS_LIST.get(pos).unwrap_or(&"")
         };
 
         let mut phone_nr: String = (0..7)
@@ -2341,13 +2367,21 @@ pub fn generate_entries(amount: usize) -> Vec<Entry> {
             })
             .collect();
 
+        let email = format!(
+            "{}.{}@{}",
+            first_name.to_lowercase(),
+            last_name.to_lowercase(),
+            email_domain
+        );
+
         phone_nr.insert(3, '-');
 
         result.push(Entry::new(
             i,
             first_name,
             last_name,
-            &format!("+1-555-{}", phone_nr),
+            format!("+1-555-{}", phone_nr),
+            email,
         ))
     }
 
@@ -2362,6 +2396,8 @@ mod tests {
     fn random_names() {
         let result = generate_entries(10);
         assert_eq!(result.len(), 10);
-        println!("{:?}", result.get(0).unwrap())
+        let first = result.get(0).unwrap();
+        println!("{}", first);
+        println!("{:?}", first)
     }
 }

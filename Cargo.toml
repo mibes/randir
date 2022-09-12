@@ -1,12 +1,12 @@
 [package]
 name = "randir"
-version = "0.1.4"
+version = "0.2.0"
 authors = ["mibes <mibes@mibesco.com>"]
 edition = "2018"
 license = "MIT"
-description = "Generates a directory with random names and telephone numbers."
+description = "Generates a directory with random names, telephone numbers & email addresses."
 repository = "https://github.com/mibes/randir"
 readme = "README.md"
 
 [dependencies]
-rand = "0.7.3"
+rand = "0.8.5"

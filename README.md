@@ -1,12 +1,12 @@
 # randir
-Generates a directory with random names and telephone numbers. 
+Generates a directory with random names, telephone numbers & email addresses.
 
 # Example use
 ```rust
 use randir::utils::generate_entries;
 
 fn main() {
-    // generate 100 random names and telephone numbers
+    // generate 100 random names, telephone numbers & email addresses
     let directory = generate_entries(100);
     for entry in directory {
         println!("{}", entry)
@@ -23,6 +23,7 @@ pub struct Entry {
     pub first_name: String,
     pub last_name: String,
     pub phone_nr: String,
+    pub email: String,
 }
 ```
 
@@ -31,5 +32,5 @@ To use the random directory generator, you need to include it in the `Cargo.toml
 
 ```toml
 [dependencies]
-randir = "0.1.4"
+randir = "0.2"
 ```
