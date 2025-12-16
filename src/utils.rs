@@ -2333,35 +2333,35 @@ pub fn generate_entries(amount: usize) -> Vec<Entry> {
     const F_EMAIL_DOMAIN_LEN: f64 = EMAIL_DOMAIN_LEN as f64;
 
     let mut result: Vec<Entry> = Vec::with_capacity(amount);
-    let mut rng = rand::thread_rng();
+    let mut rng = rand::rng();
 
     for i in 0..amount {
-        let use_female = rng.gen();
+        let use_female = rng.random();
         let first_name = if use_female {
-            let f: f64 = rng.gen();
+            let f: f64 = rng.random();
             let pos = (f * F_FEMALE_NAMES_LEN).floor() as usize;
             *FEMALE_NAMES_LIST.get(pos).unwrap_or(&"")
         } else {
-            let f: f64 = rng.gen();
+            let f: f64 = rng.random();
             let pos = (f * F_MALE_NAMES_LEN).floor() as usize;
             *MALE_NAMES_LIST.get(pos).unwrap_or(&"")
         };
 
         let last_name = {
-            let f: f64 = rng.gen();
+            let f: f64 = rng.random();
             let pos = (f * F_SURNAMES_LEN).floor() as usize;
             *SURNAMES_LIST.get(pos).unwrap_or(&"")
         };
 
         let email_domain = {
-            let f: f64 = rng.gen();
+            let f: f64 = rng.random();
             let pos = (f * F_EMAIL_DOMAIN_LEN).floor() as usize;
             *EMAIL_DOMAINS_LIST.get(pos).unwrap_or(&"")
         };
 
         let mut phone_nr: String = (0..7)
             .map(|_| {
-                let random: f64 = rng.gen();
+                let random: f64 = rng.random();
                 let digit = (random * 9.9).floor() as u8;
                 digit.to_string()
             })
